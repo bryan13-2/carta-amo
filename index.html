@@ -2,102 +2,180 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Carta con Amor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historia de Amor 💖</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        font-family: Arial, sans-serif;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    /* ❤️ CORAZONES */
-    .heart {
-        position: absolute;
-        bottom: -20px;
-        color: rgba(255, 0, 80, 0.7);
-        font-size: 20px;
-        animation: floatUp linear infinite;
-    }
+body{
+    height:100vh;
+    overflow:hidden;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #0b0b1a, #000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
 
-    @keyframes floatUp {
-        0% { transform: translateY(0) scale(1); opacity: 1; }
-        100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
-    }
+/* 🎬 INTRO */
+.intro{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+    animation: fadeIntro 4s forwards;
+}
 
-    /* 💌 CARTA */
-    .envelope {
-        position: relative;
-        width: 320px;
-        height: 220px;
-        background: #ff4d6d;
-        border-radius: 12px;
-        cursor: pointer;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        transition: transform 0.4s;
-        z-index: 10;
-    }
+.intro h1{
+    font-size:40px;
+    letter-spacing:5px;
+}
 
-    .envelope:hover {
-        transform: scale(1.05);
-    }
+.intro p{
+    margin-top:10px;
+    opacity:0.7;
+}
 
-    .flap {
-        position: absolute;
-        top: 0;
-        width: 0;
-        height: 0;
-        border-left: 160px solid transparent;
-        border-right: 160px solid transparent;
-        border-top: 110px solid #ff1f4b;
-        transform-origin: top;
-        transition: transform 0.6s;
-    }
+@keyframes fadeIntro{
+    0%{opacity:1;}
+    80%{opacity:1;}
+    100%{opacity:0; visibility:hidden;}
+}
 
-    .letter {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 0;
-        background: white;
-        overflow: hidden;
-        padding: 20px;
-        box-sizing: border-box;
-        border-radius: 10px;
-        transition: height 0.8s;
-    }
+/* 💌 CARTA */
+.envelope{
+    width:90vw;
+    max-width:420px;
+    height:280px;
+    background: rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(20px);
+    border-radius:25px;
+    box-shadow:0 30px 100px rgba(0,0,0,0.8);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:0.5s;
+}
 
-    .open .flap {
-        transform: rotateX(180deg);
-    }
+.envelope:hover{
+    transform: scale(1.03);
+}
 
-    .open .letter {
-        height: 200px;
-    }
+/* 💌 SOLAPA */
+.flap{
+    position:absolute;
+    top:0;
+    width:0;
+    height:0;
+    border-left:210px solid transparent;
+    border-right:210px solid transparent;
+    border-top:140px solid #ff4d6d;
+    transform-origin:top;
+    transition:1s ease;
+}
 
-    .text {
-        font-size: 14px;
-        color: #333;
-        line-height: 1.5;
-        white-space: pre-wrap;
-    }
+.open .flap{
+    transform: rotateX(180deg);
+}
 
-    .heartText {
-        color: red;
-        font-size: 18px;
-    }
+/* 📜 CARTA */
+.letter{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:0;
+    background:white;
+    color:#222;
+    padding:20px;
+    overflow:hidden;
+    border-radius:20px;
+    transition:1.2s ease;
+}
+
+.open .letter{
+    height:270px;
+}
+
+/* ✍️ TEXTO */
+.text{
+    font-size:13px;
+    line-height:1.6;
+    white-space:pre-wrap;
+}
+
+/* ❤️ CORAZÓN FINAL */
+.bigHeart{
+    font-size:120px;
+    color:red;
+    text-align:center;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+/* 🌙 BOKEH */
+.bokeh{
+    position:absolute;
+    bottom:-20px;
+    color:rgba(255,255,255,0.4);
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp{
+    0%{transform:translateY(0); opacity:1;}
+    100%{transform:translateY(-120vh); opacity:0;}
+}
+
+/* 🎵 BOTON */
+.btn{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.2);
+    padding:10px 18px;
+    border-radius:25px;
+    color:white;
+    cursor:pointer;
+    backdrop-filter: blur(10px);
+}
 </style>
 </head>
 
 <body>
 
-<!-- CARTA -->
-<div class="envelope" id="carta" onclick="abrirCarta()">
+<!-- 🎬 INTRO -->
+<div class="intro">
+    <h1>Historia De Amor</h1>
+    <p>Netflix Presenta 💖</p>
+</div>
+
+<!-- 🎵 MUSICA -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button class="btn" onclick="toggleMusic()">🎵 Música</button>
+
+<!-- 💌 CARTA -->
+<div class="envelope" id="carta" onclick="nextScene()">
     <div class="flap"></div>
     <div class="letter">
         <p class="text" id="mensaje"></p>
@@ -105,58 +183,101 @@
 </div>
 
 <script>
-function abrirCarta() {
-    const carta = document.getElementById("carta");
-    carta.classList.toggle("open");
 
-    if (carta.classList.contains("open")) {
-        escribirTexto();
+let musica = document.getElementById("musica");
+let playing = false;
+
+function toggleMusic(){
+    if(!playing){
+        musica.play();
+        playing = true;
+    }else{
+        musica.pause();
+        playing = false;
     }
 }
 
-/* ✍️ EFECTO MÁQUINA DE ESCRIBIR */
-function escribirTexto() {
-    const texto = `💌 Hola amor...
+/* 🎬 ESCENAS */
+const escenas = [
+`🎬 Escena 1...
 
-Desde que llegaste a mi vida todo es más bonito.
-No eres solo un pensamiento… eres mi lugar favorito.
+En un mundo donde millones de personas se cruzan sin encontrarse,
+tú y yo logramos coincidir.`,
 
-Gracias por existir 💖
+`🎬 Escena 2...
 
-Te quiero mucho ❤`;
+Y desde ese instante… todo cambió.
 
-    const elemento = document.getElementById("mensaje");
-    elemento.innerHTML = "";
+Sin darnos cuenta, empezaste a convertirte en mi lugar seguro,
+en esa calma que no sabía que necesitaba.`,
 
-    let i = 0;
+`🎬 Escena 3...
 
-    function escribir() {
-        if (i < texto.length) {
-            elemento.innerHTML += texto.charAt(i);
+No fue planeado…
+No fue buscado…
+
+pero contigo entendí que algunas personas llegan
+para quedarse en el alma.
+
+Gracias por existir. Fin...`
+];
+
+let escena = 0;
+let i = 0;
+let escribiendo = false; // 🔒 BLOQUEO
+
+function nextScene(){
+
+    if(escribiendo) return; // 🚫 bloquea clic mientras escribe
+
+    const carta = document.getElementById("carta");
+    const el = document.getElementById("mensaje");
+
+    carta.classList.add("open");
+
+    // ❤️ FINAL
+    if(escena >= escenas.length){
+        el.innerHTML = `<div class="bigHeart">❤️</div>`;
+        return;
+    }
+
+    let texto = escenas[escena];
+    el.innerHTML = "";
+
+    escribiendo = true;
+
+    function escribir(){
+        if(i < texto.length){
+            el.innerHTML += texto.charAt(i);
             i++;
-            setTimeout(escribir, 40); // velocidad de escritura
+            setTimeout(escribir, 35);
+        }else{
+            escena++;
+            i = 0;
+            escribiendo = false; // 🔓 desbloquea al terminar
         }
     }
 
     escribir();
 }
 
-/* ❤️ CORAZONES FLOTANTES */
-function crearCorazon() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤";
+/* 🌙 BOKEH */
+function bokeh(){
+    const b = document.createElement("div");
+    b.classList.add("bokeh");
+    b.innerHTML = "❤";
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (10 + Math.random() * 25) + "px";
-    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+    b.style.left = Math.random()*100 + "vw";
+    b.style.fontSize = (8 + Math.random()*25) + "px";
+    b.style.animationDuration = (3 + Math.random()*6) + "s";
 
-    document.body.appendChild(heart);
+    document.body.appendChild(b);
 
-    setTimeout(() => heart.remove(), 8000);
+    setTimeout(()=>b.remove(),9000);
 }
 
-setInterval(crearCorazon, 300);
+setInterval(bokeh,180);
+
 </script>
 
 </body>

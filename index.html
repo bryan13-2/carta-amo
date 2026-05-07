@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Carta con Amor</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: Arial, sans-serif;
+    }
+
+    /* ❤️ CORAZONES */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        color: rgba(255, 0, 80, 0.7);
+        font-size: 20px;
+        animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+
+    /* 💌 CARTA */
+    .envelope {
+        position: relative;
+        width: 320px;
+        height: 220px;
+        background: #ff4d6d;
+        border-radius: 12px;
+        cursor: pointer;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        transition: transform 0.4s;
+        z-index: 10;
+    }
+
+    .envelope:hover {
+        transform: scale(1.05);
+    }
+
+    .flap {
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 0;
+        border-left: 160px solid transparent;
+        border-right: 160px solid transparent;
+        border-top: 110px solid #ff1f4b;
+        transform-origin: top;
+        transition: transform 0.6s;
+    }
+
+    .letter {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 0;
+        background: white;
+        overflow: hidden;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        transition: height 0.8s;
+    }
+
+    .open .flap {
+        transform: rotateX(180deg);
+    }
+
+    .open .letter {
+        height: 200px;
+    }
+
+    .text {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+        white-space: pre-wrap;
+    }
+
+    .heartText {
+        color: red;
+        font-size: 18px;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- CARTA -->
+<div class="envelope" id="carta" onclick="abrirCarta()">
+    <div class="flap"></div>
+    <div class="letter">
+        <p class="text" id="mensaje"></p>
+    </div>
+</div>
+
+<script>
+function abrirCarta() {
+    const carta = document.getElementById("carta");
+    carta.classList.toggle("open");
+
+    if (carta.classList.contains("open")) {
+        escribirTexto();
+    }
+}
+
+/* ✍️ EFECTO MÁQUINA DE ESCRIBIR */
+function escribirTexto() {
+    const texto = `💌 Hola amor...
+
+Desde que llegaste a mi vida todo es más bonito.
+No eres solo un pensamiento… eres mi lugar favorito.
+
+Gracias por existir 💖
+
+Te quiero mucho ❤`;
+
+    const elemento = document.getElementById("mensaje");
+    elemento.innerHTML = "";
+
+    let i = 0;
+
+    function escribir() {
+        if (i < texto.length) {
+            elemento.innerHTML += texto.charAt(i);
+            i++;
+            setTimeout(escribir, 40); // velocidad de escritura
+        }
+    }
+
+    escribir();
+}
+
+/* ❤️ CORAZONES FLOTANTES */
+function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (10 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
